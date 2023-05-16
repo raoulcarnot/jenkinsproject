@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-        registry = "150741279371.dkr.ecr.us-east-1.amazonaws.com/projectjenkins"
+        registry = "150741279371.dkr.ecr.eu-central-1.amazonaws.com/projectjenkins"
     }
     
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/soma2907/newjenkinsproject.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/raoulcarnot/jenkinsproject.git']]])
             }
         }
     
@@ -23,8 +23,8 @@ pipeline {
         stage ("docker push") {
          steps {
              script {
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 150741279371.dkr.ecr.us-east-1.amazonaws.com"
-                sh "docker push 150741279371.dkr.ecr.us-east-1.amazonaws.com/projectjenkins"
+                sh "aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 150741279371.dkr.ecr.eu-central-1.amazonaws.com"
+                sh "docker push 150741279371.dkr.ecr.eu-central-1.amazonaws.com/projectjenkins"
                  
              }
            }   
