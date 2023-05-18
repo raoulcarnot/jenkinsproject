@@ -33,7 +33,7 @@ pipeline {
                 withAWS(credentials: 'awscredentials', region: 'eu-central-1') {
                   script {
                     sh ('aws eks --region eu-central-1 update-kubeconfig --name raoul1cluster')
-                    sh '/var/lib/jenkins/kubectl apply -f eks-deploy-k8s.yaml'
+                    sh 'kubectl apply -f eks-deploy-k8s.yaml'
                 }
                 }
         }
